@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			/*
+			#### 8、监听事件
+				(1)绑定监听 传入event  @click="test2(123, $event)
+					<button type="button" @click="test2(123, $event)">传参数可传入$event获取event</button>
+					test2(num, event){
+						console.log("参数：  "+num)
+						console.log(event.target.innerHTML)
+					},
+				(2)事件修饰符 @click.stop="test4()" 除去冒泡事件
+					<div @click="test3()" style="width: 200px; height: 200px; background-color: red;">
+						<div @click.stop="test4()" style="width: 100px; height: 100px; background-color: blue">
+						</div>
+					</div>
+				(3)按键修饰符  @keyup.enter="test5"
+					<!-- 阻止默认事件发生 -->
+					<a href="http://www.baidu.com" @click.prevent="test6">去百度</a>
+				(4)
+				(5)
+			*/
+		</script>
+	</head>
+	<body>
+		<div id="app">
+			<h2>绑定监听  @click="test2(123, $event)</h2>
+			<button type="button" @click="test1($event)">不传参数自动自动获取event</button>
+			<button type="button" @click="test2(123, $event)">传参数可传入$event获取event</button>
+			
+			<h2>事件修饰符</h2>
+			<p>@click.stop="test4()"  除去事件冒泡</p>
+			<div @click="test3()" style="width: 200px; height: 200px; background-color: red;">
+				<div @click.stop="test4()" style="width: 100px; height: 100px; background-color: blue">
+				</div>
+			</div>
+			
+			<h2>按键修饰符  @keyup.enter="test5"</h2>
+			<p>
+				<!-- 阻止默认事件发生 -->
+				<a href="http://www.baidu.com" @click.prevent="test6">去百度</a>
+			</p>
+			<input type="text" v-model="input" @keyup.enter="test5"/>
+			<input type="text" v-model="input" @keyup.65="test5"/>
+		</div>
+		
+		
+	</body>
+	<script type="text/javascript">
+		new Vue({
+			el: '#app',
+			data:{
+				test1(event){
+					console.log(event.target.innerHTML)
+					// alert(event.target.innerHTML)
+				},
+				test2(num, event){
+					console.log("参数：  "+num)
+					console.log(event.target.innerHTML)
+				},
+				test3(){
+					console.log("test3")
+				},
+				test4(){
+					console.log('test4')
+				},
+				test5(){
+					console.log(this.input)
+				},
+				input: '',
+				test6(){
+					console.log('test6')
+				}
+			},
+			methods:{
+				
+			}
+		})
+	</script>
+</html>

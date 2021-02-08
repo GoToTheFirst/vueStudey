@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			/*
+			#### 1、
+				(1)MVVM 
+					M model : 模型数据对象（data） 
+					V view : 视图 模板页面
+					VM viewModel :  视图模型 （vue实例 即 var vm = new vue()）
+				(2)绑定数据 实时更新
+					<input type="text" v-model="message"/>
+					<p>hello??? {{message}}</p>
+				(3)
+				(4)
+				(5)
+			*/
+			
+		</script>
+	</head>
+	<body>
+		<div id="app">
+			<input type="text" v-model="message"/>
+			<p>hello??? {{message}}</p>
+		</div>
+		
+		<div id="app123">
+			<input type="text" v-model="name"/>
+			<p>hello??? {{name}}</p>
+		</div>
+	</body>
+	<script type="text/javascript">
+		// 创建实例
+		var vm = new Vue({   // 配置对象 
+			el: "#app",       // element 选择器
+			data: {           //数据model
+				message: "hello vue!"
+			}
+		})
+		vm.name = "sdlfj"
+		
+		var vm = new Vue({
+			el: '#app123',
+			data: {
+				name : 'ceshi'
+			}
+		})
+	</script>
+</html>

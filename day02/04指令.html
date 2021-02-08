@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			/*
+			#### 1、指令
+				(1)防止闪现表达式 v-cloak 同时使用css配合
+					<p v-cloak >{{msg}}</p>
+					[v-cloak] {
+						display: none;
+					}
+				(2)其他指令
+					v:text 更新内容 同{{}} 写法一样
+					v-html 更新元素的innerhtml
+					v-if v-else
+					v-show
+					v-for
+					v-on 可以简写为 @
+					v-bind 强制绑定解析表达式 可以简写为 :
+					v-model 双向数据绑定
+					ref 注册一个唯一标识，在vue中通过 this.$refs.content 获得对象元素
+				(3)自定义指令
+					1、全局有效
+					// 全局写法
+					Vue.directive('upper-text', function(el, binding){
+						// console.log(binding)
+						el.textContent = binding.value.toUpperCase()
+					})
+					2、局部指令，在vue实例中使用directives
+					directives:{
+						'lower-text': function(el, binding){
+							el.textContent = binding.value.toLowerCase()
+						}
+					}
+				(4)
+				(5)
+			*/
+		</script>
+		<style type="text/css">
+			/* 属性选择器 标签里面有此属性的标签 */
+			[v-cloak] {
+				display: none;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="exemple">
+			<!-- ref 是个标识， 在vue中通过 this.$refs.content 获得对象元素 -->
+			<p ref="content" >这是测试</p>
+			<button type="button" @click="hit">点击测试</button>
+			<p v-cloak >{{msg}}</p>
+		</div>
+		
+		<div id="test1">
+			<p v-upper-text="msg"></p>
+		</div>
+		<div id="test2">
+			<p v-upper-text="msg"></p>
+			<!--v-lower-text是test3的局部指令只对局部起作用  -->
+			<p v-lower-text = 'msg'></p>
+		</div>
+		<div id="test3">
+			<p v-upper-text="msg"></p>
+			<p v-lower-text = 'msg'></p>
+		</div>
+	</body>
+	<script type="text/javascript">
+		
+		// 全局写法
+		Vue.directive('upper-text', function(el, binding){
+			// console.log(binding)
+			el.textContent = binding.value.toUpperCase()
+		})
+		
+		new Vue({
+			el:'#test1',
+			data:{
+				msg: 'This is a test'
+			}
+		})
+		
+		new Vue({
+			el:'#test2',
+			data:{
+				msg: 'This is a test'
+			}
+		})
+		
+		new Vue({
+			el:'#test3',
+			data:{
+				msg: 'This is a test'
+			},
+			// 定义局部指令
+			directives:{
+				'lower-text': function(el, binding){
+					el.textContent = binding.value.toLowerCase()
+				}
+			}
+		})
+		
+		// alert('sdf')
+		new Vue({
+			el: '#exemple',
+			data:{
+				
+				msg: '防止闪现表达式'
+			},
+			methods:{
+				hit(){
+					console.log(this.$refs.content.textContent)
+				}
+			}
+		})
+	</script>
+</html>

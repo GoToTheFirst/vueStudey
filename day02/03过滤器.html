@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="https://cdn.bootcdn.net/ajax/libs/moment.js/2.29.1/moment.js"></script>
+		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			
+			/*
+			#### 3、过滤器 语法：Vue.filter('filterStr', function(){})
+				(1)moment 格式化事件参考文档：https://momentjs.bootcss.com/
+			*/
+		</script>
+	</head>
+	<body>
+		<div id="app">
+			<p>{{date | filterStr}}</p>
+			<p>{{date | filterStr('MM Do YYYY')}}</p>
+			<p>{{date | filterStr('dddd')}}</p>
+		</div>
+	</body>
+	<script type="text/javascript">
+		
+		// es6写法 若format传入值则因引用传入值，否则format = 'YYYY-MM-DD hh-mm-ss a'
+		Vue.filter('filterStr', function(value, format = 'YYYY-MM-DD hh-mm-ss a'){
+			return moment(value).format( format)
+		})
+		// Vue.filter('filterStr', function(value, format){
+		// 	return moment(value).format( format || 'YYYY-MM-DD hh-mm-ss a')
+		// })
+		new Vue({
+			el:"#app",
+			data:{
+				date: new Date()
+			}
+		})
+	</script>
+</html>

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			/*
+			#### 2、过度动画
+				(1)动画 消失效果
+				1、HTML中
+					<div id="test2">
+						<button type="button" @click="changeShow">toggle</button>
+						<transition name="xxx">
+							<p v-show="isShow" >hello</p>
+						</transition>
+					</div>
+				2、css中
+					显示时的过度效果
+					.yyy-enter-active{
+						transition: all 1s;
+					}
+					隐藏时的过度效果
+					.yyy-leave-active{
+						transition: all 2s;
+					}
+					.yyy-enter, .yyy-leave-to{
+						opacity: 0;
+						transform: translateY(20px);
+					}
+				(2)放大效果
+				1、HTML中
+					<div id="test4">
+						<button type="button" @click="changeShow">toggle</button>
+						<br>
+						<transition name="scal">
+							<p v-show="isShow" style="display: inline-block;">放大效果</p>
+						</transition>
+					</div>
+				2、css中
+					放大缩小效果
+					.scal-enter-active{  // 显示效果
+						animation: bounce-in 1s;
+					}
+					.scal-leave-active{  隐藏效果
+						animation: bounce-in 1s reverse;
+					}
+					过度效果 
+					@keyframes bounce-in{  
+						0%{
+							transform: scale(0);
+						}
+						50%{
+							transform: scale(1.5);
+						}
+						100%{
+							transform: scale(1);
+						}
+					}
+				(3)
+				(4)
+				(5)
+			*/
+		</script>
+		<style type="text/css">
+			/* 显示/隐藏的过度效果 */
+			.xxx-enter-active, .xxx-leave-active{
+				transition: opacity 1s;
+			}
+			/* 隐藏时的样式 */
+			.xxx-enter, .xxx-leave-to{
+				opacity: 0;
+			}
+			
+			/* 显示时的过度效果 */
+			.yyy-enter-active{
+				transition: all 1s;
+			}
+			/* 隐藏时的过度效果 */
+			.yyy-leave-active{
+				transition: all 2s;
+			}
+			.yyy-enter, .yyy-leave-to{
+				opacity: 0;
+				transform: translateY(20px);
+			}
+			
+			/* 放大缩小效果 */
+			.scal-enter-active{
+				animation: bounce-in 1s;
+			}
+			.scal-leave-active{
+				animation: bounce-in 1s reverse;
+			}
+			@keyframes bounce-in{
+				0%{
+					transform: scale(0);
+				}
+				50%{
+					transform: scale(1.5);
+				}
+				100%{
+					transform: scale(1);
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<div id="test1">
+			<button type="button" @click="changeShow">toggle</button>
+			<p v-show="isShow">hello</p>
+		</div>
+		<div id="test2">
+			<button type="button" @click="changeShow">toggle</button>
+			<transition name="xxx">
+				<p v-show="isShow" >hello</p>
+			</transition>
+		</div>
+		<div id="test3">
+			<button type="button" @click="changeShow">toggle</button>
+			<transition name="yyy">
+				<p v-show="isShow" >hello</p>
+			</transition>
+		</div>
+		<div id="test4">
+			<button type="button" @click="changeShow">toggle</button>
+			<br>
+			<transition name="scal">
+				<p v-show="isShow" style="display: inline-block;">放大效果</p>
+			</transition>
+		</div>
+	</body>
+	<script type="text/javascript">
+		new Vue({
+			el: '#test1',
+			data: {
+				isShow: true
+			},
+			methods: {
+				changeShow() {
+					this.isShow = !this.isShow
+				}
+			}
+		})
+
+		new Vue({
+			el: '#test2',
+			data: {
+				isShow: true
+			},
+			methods:{
+				changeShow() {
+					this.isShow = !this.isShow
+				}
+			}
+		})
+		
+		new Vue({
+			el: '#test3',
+			data: {
+				isShow: true
+			},
+			methods:{
+				changeShow() {
+					this.isShow = !this.isShow
+				}
+			}
+		})
+		
+		new Vue({
+			el: '#test4',
+			data: {
+				isShow: true
+			},
+			methods:{
+				changeShow() {
+					this.isShow = !this.isShow
+				}
+			}
+		})
+	</script>
+</html>

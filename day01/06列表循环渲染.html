@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="../js/vue.js" type="text/javascript"></script>
+		<script type="text/javascript">
+			/*
+			#### 6、
+				(1)Vue 将被侦听的数组的变更方法进行了包裹，所以它们也将会触发视图更新。
+					这些被包裹过的方法包括：
+					push()
+					pop()
+					shift()
+					unshift()
+					splice()
+					sort()
+					reverse()
+				(2)person[index] = {name:'cat', age: 22} 不能被检测 可以用上述方法中的splice()方法代替
+				(3)遍历数组   v-for="(p, index) in persons"
+					<tr v-for="(p, index) in persons">
+						<td>{{p.name}}</td>
+						<td>{{p.age}}</td>
+						<td><button type="button" @click="delate(index)">删除</button></td>
+						<td><button type="button" @click="update(index, {name:'cat',age:22})">更新</button></td>
+					</tr>
+				(4)遍历对象   v-for="(item, key) in persons[1]"
+					<ul>
+						<li v-for="(item, key) in persons[1]">
+							<!-- item为属性值 key为属性名，特别标志可用key 不同的属性名 -->
+							{{item}}-----{{key}}
+						</li>
+					</ul>
+				(5)
+			*/
+		</script>
+	</head>
+	<body>
+		<div id="app">
+			<ul>
+				<li v-for="(p, index) in persons" :key="index">
+					{{index}}----{{p.name}}-----{{p.age}}
+				</li>
+			</ul>
+
+			<table>
+				<tr>
+					<th>姓名</th>
+					<th>年龄</th>
+				</tr>
+				<tr v-for="(p, index) in persons">
+					<td>{{p.name}}</td>
+					<td>{{p.age}}</td>
+					<td><button type="button" @click="delate(index)">删除</button></td>
+					<td><button type="button" @click="update(index, {name:'cat',age:22})">更新</button></td>
+				</tr>
+			</table>
+			
+			<h1>遍历对象</h1>
+			<ul>
+				<li v-for="(item, key) in persons[1]">
+					<!-- item为属性值 key为属性名，特别标志可用key 不同的属性名 -->
+					{{item}}-----{{key}}
+				</li>
+			</ul>
+		</div>
+	</body>
+	<script type="text/javascript">
+		new Vue({
+			el: '#app',
+			data: {
+				persons: [{
+						name: 'tom',
+						age: 15
+					},
+					{
+						name: 'jack',
+						age: 19
+					},
+					{
+						name: 'rose',
+						age: 25
+					}
+				]
+			},
+			methods: {
+				delate(index) {
+					this.persons.splice(index, 1)
+				},
+				update(index, newP) {
+					this.persons.splice(index, 1, newP)
+				}
+
+			}
+		})
+	</script>
+</html>

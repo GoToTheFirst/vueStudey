@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script type="text/javascript" src="../js/vue.js"></script>
+		<script type="text/javascript">
+			/*
+			#### 2、vue语法介绍
+				(1)基本语法： {{内写js代码}}
+					<p>{{msg}}</p>	
+				(2)强制数据绑定 v-bind:src=""
+					<img v-bind:src="imgURL">
+					<img :src="imgURL"> 简写方式
+				(3)强制事件绑定 传参可以是js变量名，函数必须写在methods:{}里面
+					<button type="button" v-on:click="test">强制事件绑定</button>
+					<button type="button" @click="test">强制事件绑定简写</button>
+					<button type="button" @click="test1(msg)">强制事件绑定-传参</button>
+				(4)
+				(5)
+			*/
+			
+		</script>
+	</head>
+	<body>
+		<div id="app">
+			<h1>双括号里面可以写js代码</h1>
+			
+			<p>{{msg}}</p>
+			<p>msg.toUpperCase() 变大写 ： {{msg.toUpperCase()}}</p>
+			<p v-html="hl"></p>
+			
+			<h1>v-bind:src="imgURL" 强制数据绑定</h1>
+			
+			<img v-bind:src="imgURL">
+			<img :src="imgURL">
+			
+			<h1>强制事件绑定</h1>
+			
+			<button type="button" v-on:click="test">强制事件绑定</button>
+			<button type="button" @click="test">强制事件绑定简写</button>
+			<button type="button" @click="test1(msg)">强制事件绑定-传参</button>
+		</div>
+
+	</body>
+	<script type="text/javascript">
+		new Vue({
+			el: '#app',
+			data: {
+				msg: 'hello',
+				hl: '<a href="">v-html绑定 插入超链接</a>',
+				imgURL: 'https://cn.vuejs.org/images/logo.png'
+			},
+			methods:{
+				test(){
+					alert("测试")
+				},
+				test1(a){
+					alert(a)
+				}
+			}
+		})
+	</script>
+</html>

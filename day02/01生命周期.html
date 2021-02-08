@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			/*
+			#### 1、生命周期 -- 常用 mounted初始化显示之后  beforeDestroy 销毁前
+				(1)mounted 函数初始化显示之后立即执行, 只执行一次
+					mounted() {  // 初始化显示之后立即执行, 只执行一次
+						// 正常函数this是内部的 箭头函数不传this 向上查找 找到this
+						this.timer = setInterval(() => {   // 用this.timer赋值，保存在vm中
+							console.log("zhixing")
+							this.isShow = !this.isShow
+						}, 1000)
+					}
+				(2)beforeDestroy 在销毁前调用 只执行一次
+					beforeDestroy(){  // 在销毁前调用 只执行一次
+					clearInterval(this.timer)
+					},
+				(3)$destroy() 方法销毁vm 可用 this.$destory()
+					beforeDestroy(){  // 在销毁前调用 只执行一次
+						clearInterval(this.timer)
+					},
+				(4)全部声明周期  常用 mounted初始化显示之后  beforeDestroy 销毁前
+					// 1、初始化 创建前 创建后 显示前 显示后 执行一次
+						beforeCreate(){
+							console.log('beforeCreate')
+						},
+						created() {
+							console.log('created')
+						},
+						beforeMount() {
+							console.log('beforeMount')
+						},
+						mounted() {
+							console.log("mounted")
+						},
+					2、更新阶段 更新前 更新后 执行n次
+						beforeUpdate() {
+							console.log('beforeUpdate')
+						},
+						updated() {
+							console.log('updated')
+						},
+					3、销毁阶段 销毁前 销毁后
+						beforeDestroy(){  // 在销毁前调用 只执行一次
+							console.log('beforeDestroy')
+						},
+						destroyed() {
+							console.log('destroyed')
+						}
+				(5)
+			*/
+		</script>
+		
+		
+	</head>
+	<body>
+		<div id="demo">
+			<button type="button" @click="des">销毁vm</button>
+			<p v-show="isShow">闪烁</p>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var vm = new Vue({
+			el: "#demo",
+			data: {
+				isShow: 'true'
+			},
+			methods:{
+				des(){
+					this.$destroy()
+				}
+			},
+			
+			// 1、初始化 创建前 创建后 显示前 显示后 执行一次
+			beforeCreate(){
+				console.log('beforeCreate')
+			},
+			created() {
+				console.log('created')
+			},
+			beforeMount() {
+				console.log('beforeMount')
+			},
+			mounted() {  // 初始化显示之后立即执行, 只执行一次
+				// 正常函数this是内部的 箭头函数不传this 向上查找 找到this
+				this.timer = setInterval(() => {   // 用this.timer赋值，保存在vm中
+					console.log("mounted")
+					this.isShow = !this.isShow
+				}, 1000)
+			},
+			// 2、更新阶段 更新前 更新后 执行n次
+			beforeUpdate() {
+				console.log('beforeUpdate')
+			},
+			updated() {
+				console.log('updated')
+			},
+			// 3、销毁阶段 销毁前 销毁后
+			beforeDestroy(){  // 在销毁前调用 只执行一次
+				console.log('beforeDestroy')
+				clearInterval(this.timer)
+			},
+			
+			destroyed() {
+				console.log('destroyed')
+			}
+			
+			
+			
+			
+			
+			
+		})
+	</script>
+</html>

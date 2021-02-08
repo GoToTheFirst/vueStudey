@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<script type="text/javascript" src="../js/vue.js"></script>
+		<title></title>
+		<style type="text/css">
+			.aClass{
+				color: red;
+			}
+			.bClass{
+				color: blue;
+			}
+			.cClass{
+				font-size: 30px;
+			}
+		</style>
+		<script type="text/javascript">
+			/*
+			#### 4、class style绑定改变样式
+				(1)class绑定 :class="xxx"  <p :class="className"></p>
+					· xxx是字符串 data里面设置 className: 'aClass'
+					· xxx是对象 aClass为类名 isA是属性值 true/false 在data里面设置 
+					<p :class="{aClass: isA, cClass: isC}">class绑定 对象</p>
+					· xxx是数组 数组里面是类名
+					<p :class="['bClass', 'cClass']">class绑定 数组</p>
+				(2)style绑定 改变style值
+					<p :style="{color: activeColor, fontSize: fontsize + 'px'} ">
+				(3)
+				(4)
+				(5)
+			*/
+		</script>
+	</head>
+	<body>
+		<div id="app">
+			<h1>class绑定</h1>
+			<!-- :class 里面是字符串 -->
+			<p class="cClass" :class="className">class绑定 字符串</p>
+			<!-- :class 里面是对象 -->
+			<p :class="{aClass: isA, cClass: isC}">class绑定 对象</p>
+			<!-- :class 里面是数组 -->
+			<p :class="['bClass', 'cClass']">class绑定 数组</p>
+			<h1>style绑定</h1>
+			<p :style="{color: activeColor, fontSize: fontsize + 'px'} ">style绑定 :style="{}"</p>
+			
+			<button type="button" @click="change">更新</button>
+		</div>
+	</body>
+	<script type="text/javascript">
+		new Vue({
+			el: '#app',
+			data: {
+				className: 'aClass',
+				isA: true,
+				isC: false,
+				activeColor: 'black',
+				fontsize: 20
+			},
+			methods:{
+				change: function(){
+					this.className = 'bClass'
+					this.isA = false
+					this.isC = true
+					this.activeColor = 'red'
+					this.fontsize = 30
+				},
+				
+			}
+		})
+	</script>
+</html>

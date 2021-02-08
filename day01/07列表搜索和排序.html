@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="../js/vue.js" type="text/javascript"></script>
+		<script type="text/javascript" charset="utf-8">
+			/*
+			#### 7、排序和搜索
+				(1)搜索方法
+					filterPersons() {
+						// 获取 persons 和 searchName orderType 写在computed中，当数据变化时会自动调用
+						const {
+							persons,
+							searchName,
+							orderType
+						} = this
+						// 搜索过滤
+						let filterPersons = persons.filter(p => p.name.indexOf(searchName) >= 0)
+						// 排序情况，当点击不同按钮时 设置不同的排序方式
+						if (orderType != 0) {
+							filterPersons.sort(function(p1, p2) {
+								if (orderType == 1) return p1.age - p2.age
+								else return p2.age - p1.age
+							})
+						}
+						return filterPersons
+					}
+				(2)
+				(3)
+				(4)
+				(5)
+			*/
+		</script>
+	</head>
+	<body>
+		<div id="app">
+			<input type="text" v-model="searchName" />
+			<ul>
+				<li v-for="(p, index) in filterPersons" :key="index">
+					{{index}}----{{p.name}}-----{{p.age}}
+				</li>
+			</ul>
+			<button type="button" @click="setOrderType(1)">年龄升序</button>
+			<button type="button" @click="setOrderType(2)">年龄降序</button>
+			<button type="button" @click="setOrderType(0)">年龄原本顺序序</button>
+		</div>
+	</body>
+	<script type="text/javascript">
+		new Vue({
+			el: '#app',
+			data: {
+				persons: [{
+						name: 'tom',
+						age: 15
+					},
+					{
+						name: 'jack',
+						age: 29
+					},
+					{
+						name: 'rose',
+						age: 25
+					}
+				],
+				searchName: '',
+				// 排序方式 升序为1 降序为2 原来顺序为0
+				orderType: 0
+			},
+			computed: {
+				filterPersons() {
+					// 获取 persons 和 searchName
+					const {
+						persons,
+						searchName,
+						orderType
+					} = this
+					// 搜索过滤
+					let filterPersons = persons.filter(p => p.name.indexOf(searchName) >= 0)
+					if (orderType != 0) {
+						filterPersons.sort(function(p1, p2) {
+							if (orderType == 1) return p1.age - p2.age
+							else return p2.age - p1.age
+						})
+					}
+					return filterPersons
+				}
+			},
+			methods: {
+				setOrderType(newOrderType) {
+					this.orderType = newOrderType
+					// console.log("修改排序" + this.orderType)
+				}
+			}
+		})
+	</script>
+</html>

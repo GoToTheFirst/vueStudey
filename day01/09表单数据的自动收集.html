@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			/*
+			#### 9、表单数据收集 
+				(1)阻止跳转 消除默认行为
+					<form action="/xxx" method="post" @submit.prevent="getMsg">
+				(2)绑定下拉选项 在select处绑定
+					<select v-model="selectCity">
+						<option value="">未选择</option>
+						<option :value="c.name" v-for="(c, index) in allCity" :key="index" >{{c.name}}</option>
+					</select>
+				(3)绑定多选 设置为数组 每个都需要绑定
+					<span>爱好</span>
+					<input type="checkbox" name="hobby" value="baskerball" v-model="hobby" />
+					<span>篮球</span>
+					<input type="checkbox" name="hobby" value="football" v-model="hobby" />
+				(4)绑定单选
+					<input type="radio" value="男" v-model="gender" />
+					<span>男</span>
+					<input type="radio" value="女" v-model="gender" />
+					<span>女</span>
+				(5)
+			*/
+		</script>
+	</head>
+	<body>
+		<div id="app">
+			<form action="/xxx" method="post" @submit.prevent="getMsg">
+				<span>用户名:</span>
+				<input type="text" placeholder=""/ v-model="userName">
+				<br>
+
+				<span>密&nbsp;&nbsp;&nbsp;码: </span>
+				<input type="password"/ v-model="psw">
+				<br>
+
+				<span>性&nbsp;&nbsp;&nbsp;别: </span>
+				<input type="radio" value="男" v-model="gender" />
+				<span>男</span>
+				<input type="radio" value="女" v-model="gender" />
+				<span>女</span>
+				<br>
+
+				<span>爱好</span>
+				<input type="checkbox" name="hobby" value="baskerball" v-model="hobby" />
+				<span>篮球</span>
+				<input type="checkbox" name="hobby" value="football" v-model="hobby" />
+				<span>足球</span>
+				<input type="checkbox" name="hobby" value="run" v-model="hobby" />
+				<span>跑步</span>
+				<input type="checkbox" name="hobby" value="music" v-model="hobby" />
+				<span>音乐</span>
+				<br>
+				<span>城市：</span>
+				<select v-model="selectCity">
+					<option value="">未选择</option>
+					<option :value="c.name" v-for="(c, index) in allCity" :key="index" >{{c.name}}</option>
+				</select>
+				<br>
+				<span>介绍：</span>
+				<textarea rows="10" cols="50" v-model="describe" placeholder="自我介绍。。。"></textarea>
+				<br>
+				<input type="submit" value="提交" />
+			</form>
+
+		</div>
+	</body>
+	<script type="text/javascript">
+		new Vue({
+			el: '#app',
+			data: {
+				userName: '',
+				psw: '',
+				gender: '男',   // 默认选择男
+				hobby: ['football'],      // 默认选择足球
+				allCity: [{
+					id: 1,
+					name: '北京'
+				}, {
+					id: 2,
+					name: '杭州'
+				}, {
+					id: 3,
+					name: '上海'
+				}],
+				selectCity: '北京',  //默认选择北京
+				describe: ''
+			},
+			methods: {
+				getMsg() {
+					console.log("获取到的信息："+this.userName+this.psw+this.gender+this.hobby+this.selectCity+this.describe)
+				}
+			}
+		})
+	</script>
+</html>
