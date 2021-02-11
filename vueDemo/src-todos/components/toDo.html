@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style type="text/css">
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      #toDoContenter {
+        width: 600px;
+        margin: 0 auto;
+        /* background-color: #808080; */
+      }
+
+      #toDohead {
+        margin: 0 auto;
+      }
+
+      #toDoBody {
+        /* margin: 0 auto; */
+        display: flex;
+        flex-direction: column;
+      }
+
+      #toDoItem {
+        margin: 5px;
+        border: 1px #808080 solid;
+        font-size: 20px;
+        /* background-color: #FF0000; */
+
+      }
+    </style>
+  </head>
+  <body>
+    <div id="toDoContenter">
+      
+      <div id="toDoBody" style="margin: 10px 0;">
+        <div id="toDoItem">
+          <input type="checkbox" />
+          <span>这是事件</span>
+        </div>
+        <div id="toDoItem">
+          <input type="checkbox" />
+          <span>这是事件</span>
+        </div>
+        <div id="toDoItem" style="border: 1px gray solid;">
+          <input type="checkbox" />
+          <span>这是事件</span>
+        </div>
+      </div>
+      <div id="toDoFooter">
+        <div id="" style="float: left;margin-left: 20px;">
+          <input type="checkbox" name="" />
+          <span id="" style="margin-left: 20px;">
+            已完成0/全部2
+          </span>
+        </div>
+        <div id="" style="float: right;">
+          <button type="button" style="height: 30px; background-color: #FF0000;">清除已经完成任务</button>
+        </div>
+
+      </div>
+    </div>
+  </body>
+</html>

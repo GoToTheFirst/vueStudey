@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style type="text/css">
+      #coment {
+        display: flex;
+      }
+
+      #left {
+        float: left;
+        flex-basis: 300px;
+        border: 1px gray solid;
+        padding: 10px;
+      }
+
+      #rigth {
+        flex-basis: 300px;
+        flex-grow: 1;
+        margin-left: 20px;
+        border: 1px gray solid;
+        padding: 10px;
+        /* background-color: #808080; */
+        float: left;
+      }
+
+      .comments {
+        margin: 5px;
+        border: 1px #808080 solid;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>请对react评论</h1>
+    <div id="coment">
+
+      <div id="left">
+        <form action="" method="post">
+          <div id="">
+            <span>用户名：</span><br>
+            <input type="text" placeholder="用户名">
+          </div>
+          <div id="">
+            <span>评论内容：</span><br>
+            <textarea rows="10" cols="30">
+
+        </textarea>
+          </div>
+
+          <input type="submit" value="提交" />
+        </form>
+      </div>
+
+      <div id="rigth">
+        <h2>评论回复：</h2>
+        <div class="comments">
+          <div id="" style="float: right;">
+            <button type="button">删除</button>
+          </div>
+          <span id="" style="font-size: 25px;">
+            xxx说：
+          </span>
+          <div id="" style="margin-left: 50px;">
+            <p>react不错</p>
+          </div>
+        </div>
+        <div class="comments">
+          <div id="" style="float: right;">
+            <button type="button">删除</button>
+          </div>
+          <span id="" style="font-size: 25px;">
+            xxx说：
+          </span>
+          <div id="" style="margin-left: 50px;">
+            <p>react不错</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

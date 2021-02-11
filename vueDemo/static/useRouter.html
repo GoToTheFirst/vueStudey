@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <style type="text/css">
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    .content {
+      width: 600px;
+      margin: 0 auto;
+      background-color: lawngreen;
+    }
+
+    .header {
+      width: 100%;
+      height: 50px;
+      background-color: #808080;
+    }
+
+    .left {
+      float: left;
+      width: 200px;
+      margin: 5px;
+      background-color: #FF0000;
+    }
+
+    .left ul {
+      list-style: none;
+    }
+
+    .left li {
+      width: 100px;
+      margin: 3px;
+      height: 30px;
+      font-size: 25px;
+      background-color: aquamarine;
+    }
+
+    .left ul a {
+      text-decoration: none;
+    }
+
+    .right {
+      /* float: right; */
+      float: left;
+      width: 380px;
+      margin: 5px;
+      background-color: green;
+    }
+
+    .bar {
+      width: auto;
+      /* background-color: #7CFC00; */
+      display: flex;
+      justify-content: center;
+      border-bottom: 1px #7FFFD4 solid;
+    }
+
+    .bar span {
+      margin: 5px;
+      padding: 5px;
+      border: 1px #7FFFD4 solid;
+    }
+
+    .bar span:hover {
+      background-color: aliceblue;
+    }
+
+    .rigthConent {
+      background-color: #7CFC00;
+      padding: 10px 25px;
+    }
+  </style>
+  <body>
+    <div class="content">
+      <div class="header">
+        <h2>router Basic -01</h2>
+      </div>
+      <div id="body">
+        <div class="left">
+          <ul>
+            <li><a href="">Home</a></li>
+            <li><a href="">About</a></li>
+          </ul>
+        </div>
+        <div class="right" style="display: none;">
+          <h3>About组件</h3>
+          <p>About组件About组件About组件About组件</p>
+        </div>
+        <div class="right">
+          <div class="bar">
+            <!-- <h2>子组件</h2> -->
+            <span id="">
+              <h3>News</h3>
+            </span>
+            <span id="">
+              <h3>Message</h3>
+            </span>
+          </div>
+
+          <div class="rigthConent" style="display: none;">
+            <ul>
+              <li>News001</li>
+              <li>News001</li>
+              <li>News001</li>
+            </ul>
+          </div>
+
+          <div class="rigthConent" style="display: ;">
+            <ul>
+              <li>Msg001</li>
+              <li>Msg002</li>
+              <li>Msg003</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </body>
+</html>
