@@ -147,6 +147,134 @@
 		<span>女</span>
 
 ### day02
+#### 1、生命周期 -- 常用 mounted初始化显示之后  beforeDestroy 销毁前
+	(1)mounted 函数初始化显示之后立即执行, 只执行一次
+		mounted() {  // 初始化显示之后立即执行, 只执行一次
+			// 正常函数this是内部的 箭头函数不传this 向上查找 找到this
+			this.timer = setInterval(() => {   // 用this.timer赋值，保存在vm中
+				console.log("zhixing")
+				this.isShow = !this.isShow
+			}, 1000)
+		}
+	(2)beforeDestroy 在销毁前调用 只执行一次
+		beforeDestroy(){  // 在销毁前调用 只执行一次
+		clearInterval(this.timer)
+		},
+	(3)$destroy() 方法销毁vm 可用 this.$destory()
+		beforeDestroy(){  // 在销毁前调用 只执行一次
+			clearInterval(this.timer)
+		},
+	(4)全部声明周期  常用 mounted初始化显示之后  beforeDestroy 销毁前
+		// 1、初始化 创建前 创建后 显示前 显示后 执行一次
+			beforeCreate(){
+				console.log('beforeCreate')
+			},
+			created() {
+				console.log('created')
+			},
+			beforeMount() {
+				console.log('beforeMount')
+			},
+			mounted() {
+				console.log("mounted")
+			},
+		2、更新阶段 更新前 更新后 执行n次
+			beforeUpdate() {
+				console.log('beforeUpdate')
+			},
+			updated() {
+				console.log('updated')
+			},
+		3、销毁阶段 销毁前 销毁后
+			beforeDestroy(){  // 在销毁前调用 只执行一次
+				console.log('beforeDestroy')
+			},
+			destroyed() {
+				console.log('destroyed')
+			}
+#### 2、过度动画
+	(1)动画 消失效果
+	1、HTML中
+		<div id="test2">
+			<button type="button" @click="changeShow">toggle</button>
+			<transition name="xxx">
+				<p v-show="isShow" >hello</p>
+			</transition>
+		</div>
+	2、css中
+		显示时的过度效果
+		.yyy-enter-active{
+			transition: all 1s;
+		}
+		隐藏时的过度效果
+		.yyy-leave-active{
+			transition: all 2s;
+		}
+		.yyy-enter, .yyy-leave-to{
+			opacity: 0;
+			transform: translateY(20px);
+		}
+	(2)放大效果
+	1、HTML中
+		<div id="test4">
+			<button type="button" @click="changeShow">toggle</button>
+			<br>
+			<transition name="scal">
+				<p v-show="isShow" style="display: inline-block;">放大效果</p>
+			</transition>
+		</div>
+	2、css中
+		放大缩小效果
+		.scal-enter-active{  // 显示效果
+			animation: bounce-in 1s;
+		}
+		.scal-leave-active{  隐藏效果
+			animation: bounce-in 1s reverse;
+		}
+		过度效果 
+		@keyframes bounce-in{  
+			0%{
+				transform: scale(0);
+			}
+			50%{
+				transform: scale(1.5);
+			}
+			100%{
+				transform: scale(1);
+			}
+		}
+#### 3、过滤器 语法：Vue.filter('filterStr', function(){})
+	(1)moment 格式化事件参考文档：https://momentjs.bootcss.com/
+#### 4、指令
+	(1)防止闪现表达式 v-cloak 同时使用css配合
+		<p v-cloak >{{msg}}</p>
+		[v-cloak] {
+			display: none;
+		}
+	(2)其他指令
+		v:text 更新内容 同{{}} 写法一样
+		v-html 更新元素的innerhtml
+		v-if v-else
+		v-show
+		v-for
+		v-on 可以简写为 @
+		v-bind 强制绑定解析表达式 可以简写为 :
+		v-model 双向数据绑定
+		ref 注册一个唯一标识，在vue中通过 this.$refs.content 获得对象元素
+	(3)自定义指令
+		1、全局有效
+		// 全局写法
+		Vue.directive('upper-text', function(el, binding){
+			// console.log(binding)
+			el.textContent = binding.value.toUpperCase()
+		})
+		2、局部指令，在vue实例中使用directives
+		directives:{
+			'lower-text': function(el, binding){
+				el.textContent = binding.value.toLowerCase()
+			}
+		}
+
 
 ### day03
 
