@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="test">这是节点测试</div>
+		<ul>
+			<li>第一个</li>
+			<li>第二个</li>
+			<li>第三个</li>
+		</ul>
+	</body>
+	<script type="text/javascript">
+		/*
+		#### 1、
+			(1)Array.prototype.slice.call(lis) 伪数组转数组
+				// es6伪数组转数组
+				const lis2 = Array.from(lis)
+				// es5伪数组转数组
+				const lis3 = Array.prototype.slice.call(lis) //使slice成为lis的方法并回调
+			(2)node.nodeType 得到节点类型
+				const eleNode = document.getElementById('test')
+				const attrNode = eleNode.getAttributeNode('id')
+				const textNode = eleNode.firstChild
+				// nodeType为1 nodeName为DIV
+				console.log(eleNode.nodeType, eleNode.nodeName)
+				// nodeType为2 nodeName为id
+				console.log(attrNode.nodeType, attrNode.nodeName)
+				// nodeType为3 nodeName为#text
+				console.log(textNode.nodeType, textNode.nodeName)
+			(3)
+			(4)
+			(5)
+		*/
+
+		window.onload = function() {
+			// Array.prototype.slice.call(lis) 伪数组转数组
+			// 获得的是一个伪数组(Object类型),可以用下标方式访问，不能用forEach方法
+			const lis = document.getElementsByTagName('li')
+			console.log(lis instanceof Array, lis[1].innerHTML)
+			// es6伪数组转数组
+			const lis2 = Array.from(lis)
+			console.log(lis2 instanceof Array, lis2[1].innerHTML, lis2.forEach)
+			// es5伪数组转数组
+			const lis3 = Array.prototype.slice.call(lis) //使slice成为lis的方法并回调
+			console.log(lis3 instanceof Array, lis3[1].innerHTML, lis3.forEach)
+
+			// node.nodeType 得到节点类型
+			const eleNode = document.getElementById('test')
+			const attrNode = eleNode.getAttributeNode('id')
+			const textNode = eleNode.firstChild
+			// nodeType为1 nodeName为DIV
+			console.log(eleNode.nodeType, eleNode.nodeName)
+			// nodeType为2 nodeName为id
+			console.log(attrNode.nodeType, attrNode.nodeName)
+			// nodeType为3 nodeName为#text
+			console.log(textNode.nodeType, textNode.nodeName)
+
+			// Object.defineProperty(obj, 'fullName', descriptor）
+			// 属性描述符
+			// 1，数据描述符
+			// configurable 该属性的描述符才能够被改变,即是否可以重新定义
+			// enumerable 是否可以枚举 该属性的 enumerable 键值为 true 时，该属性才会出现在对象的枚举属性中。
+			// value 该属性对应的值。可以是任何有效的 JavaScript 值（数值，对象，函数等）
+			// writable value是否可变
+			// 2，访问描述符
+			// get回调函数，根据其他属性动态计算得到当前值
+			// set回调函数，监视当前属性值变化，更新其他相关值
+			const obj = {
+				firstName: 'A',
+				lastName: 'B'
+			}
+			Object.defineProperty(obj, 'fullName', {
+				get() {
+					return this.firstName + '-' + this.lastName
+				},
+				set(value) {
+					console.log('set检测到值的变化-----' + value)
+					const names = value.split('-')
+					this.firstName = names[0]
+					this.lastName = names[1]
+				}
+			})
+			console.log(obj.fullName)
+			obj.firstName = 'C'
+			obj.lastName = 'D'
+			console.log(obj.fullName)
+			obj.fullName = 'E-F'
+			console.log(obj.firstName, obj.lastName)
+			Object.defineProperty(obj, 'fullName2', {
+				configurable: false,
+				enumerable: true,
+				value: 'A-Z',
+				writable: false
+			})
+			console.log(obj.fullName2)
+			obj.fullName2 = 'Q-W' // 没有改变值
+			console.log(obj.fullName2)
+
+			// Object.keys(obj) 返回所有的属性名 enumerable默认为false
+			const keys = Object.keys(obj)
+			console.log(keys)
+		}
+	</script>
+</html>
