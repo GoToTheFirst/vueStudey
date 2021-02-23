@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="test">
+
+		</div>
+	</body>
+	<!-- <script type="text/javascript" src="../js/vue.js"></script> -->
+	<script src="../js/mvvm/compile.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../js/mvvm/mvvm.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../js/mvvm/observer.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../js/mvvm/watcher.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		// 使用MVVM库
+		let vm = new MVVM({
+			data: {
+				name: 'changchang'
+			}
+		})
+		// data中的数据实际上是存储在vm对象中的 _data中，用getter方法获得，setter方法监视获取
+		console.log(vm.name, vm)
+		// 实际更改的是vm中的_data中的数据
+		vm.name = 'gege'
+		console.log(vm.name, vm)
+	</script>
+</html>

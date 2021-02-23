@@ -277,8 +277,82 @@
 
 
 ### day03
-	####vueDemo是手脚架里面的学习 同时提交
+#### 1、语法准备
+	(1)Array.prototype.slice.call(lis) 伪数组转数组
+		// es6伪数组转数组
+		const lis2 = Array.from(lis)
+		// es5伪数组转数组
+		const lis3 = Array.prototype.slice.call(lis) //使slice成为lis的方法并回调
+	(2)node.nodeType 得到节点类型
+		const eleNode = document.getElementById('test')
+		const attrNode = eleNode.getAttributeNode('id')
+		const textNode = eleNode.firstChild
+		// nodeType为1 nodeName为DIV
+		console.log(eleNode.nodeType, eleNode.nodeName)
+		// nodeType为2 nodeName为id
+		console.log(attrNode.nodeType, attrNode.nodeName)
+		// nodeType为3 nodeName为#text
+		console.log(textNode.nodeType, textNode.nodeName)
+	(3)Object.defineProperty(obj, 'fullName', descriptor）
+		属性描述符
+		1，数据描述符
+		configurable 该属性的描述符才能够被改变,即是否可以重新定义
+		enumerable 是否可以枚举 该属性的 enumerable 键值为 true 时，该属性才会出现在对象的枚举属性中。
+		value 该属性对应的值。可以是任何有效的 JavaScript 值（数值，对象，函数等）
+		writable value是否可变
+		2，访问描述符
+		get回调函数，根据其他属性动态计算得到当前值
+		set回调函数，监视当前属性值变化，更新其他相关值value
+		es6支持，ie8不支持ie6，所以ie8不支持vue
+		Object.defineProperty(obj, 'fullName', {
+			get() {
+				return this.firstName + '-' + this.lastName
+			},
+			set(value) {
+				console.log('set检测到值的变化-----' + value)
+				const names = value.split('-')
+				this.firstName = names[0]
+				this.lastName = names[1]
+			}
+		})
+	(4)Object.keys(obj) 返回所有的属性名 enumerable默认为false
+		const keys = Object.keys(obj)
+		console.log(keys)
+	(5)DocumentFragment 为document整个更改内容
+		let fragment = document.createDocumentFragment()
+		// 1、创建对象
+		let fragment = document.createDocumentFragment()
+		let ul = document.getElementById('fragment')
+		let child
+		// 将li添加到fragment中，同时去掉原来内容
+		while (child = ul.firstChild) {
+			fragment.appendChild(child)
+		}
+		// console.log(fragment)
+		// 2、更改node中的内容
+		Array.prototype.slice.call(fragment.childNodes).forEach(node => {
+			console.log(node.nodeType)
+			// 判断node类型是否为节点，若是节点则更改内容
+			if (node.nodeType == 1) {
+				node.textContent = '这是测试'
+			}
+		})
+		// 3、更改后添加回原来位置
+		ul.appendChild(fragment)
 ### day04
+#### 1、导入导出，变量常量函数和类都可导出
+	(1)默认导出，导入时重命名
+		// 默认导出
+		export default fun
+		import def from './01export.js'
+		// 全部导入,访问时用all的属性
+		export let num = 20
+		import * as all from './01export.js'
+		console.log(all.name)
+
+
+
+
 
 
 

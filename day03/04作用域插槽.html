@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="app">
+			<cdn></cdn>
+			<cdn>
+				<!-- slot-scope="solt" 接收传递过来的数据pLanguage -->
+				<template slot-scope="slot">
+					<span>
+						{{slot.data.join(' --- ')}}
+					</span>
+				</template>
+			</cdn>
+		</div>
+		<template id="cdn">
+			<div>
+				<slot :data="pLanguage" :data="age">
+					<ul>
+						<li v-for="item in pLanguage">{{item}}</li>
+					</ul>
+				</slot>
+			</div>
+		</template>
+	</body>
+	<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		let vm = new Vue({
+			el: '#app',
+			components: {
+				cdn: {
+					template: '#cdn',
+					data() {
+						return {
+							pLanguage: ['java', 'C++', 'python'],
+							age: 15
+						}
+					}
+				}
+			}
+		})
+	</script>
+</html>
