@@ -340,7 +340,7 @@
 		// 3、更改后添加回原来位置
 		ul.appendChild(fragment)
 ### day04
-#### 1、导入导出，变量常量函数和类都可导出
+#### 1、导入导出，变量常量函数和类都可导出， 引入时都需要 ./
 	(1)默认导出，导入时重命名
 		// 默认导出
 		export default fun
@@ -349,8 +349,78 @@
 		export let num = 20
 		import * as all from './01export.js'
 		console.log(all.name)
-
-
+#### 2、webpack
+	(1)webpack是一个前端模块化管理工具，
+		grunt/grulp更强调的是前端流程自动化，webpack更强调模块化管理压缩合并、预处理是附加功能
+	(2)webpack可以打包commenJS语法和es6语法的文件，但是一个文件中只能用一种方式导出
+		导出语句：webpack .\src\main.js .\dist\boundle.js
+		commenJS模块化规范
+			导出方式module.exports = {add, mul}
+			导入方式：const {add, mul} = require('./mathUtil.js')
+		es6语法模块化规范
+			es6导出方式：export const name = 'xiaoming'
+			es6导入方式：import {name, age, height} from './info.js'
+		配置：
+		module.exports = {
+			entry: './src/main.js',
+			// output必须是绝对路径，用node中的方法，const path = require('path')
+			output: {
+				path: path.resolve(__dirname, 'dist'),
+				filename: 'bundle.js'
+			},
+		}
+	(3)npm init初始化构建，生成package.json 其中scripts中映射执行时运行脚本
+		scripts中配置脚本命令 优先使用本能地，本地没有使用全局
+		"scripts": {
+		  "test": "echo \"Error: no test specified\" && exit 1",
+			// 当执行npm run build时自动执行webpack 
+			"build": "webpack"
+		},
+	(4)安装"style-loader", "css-loader" 在main.js中引入css文件，参考webpack官网配置
+		注意 webpack3.6.0 需要 css-loader2.0.2，版本过高不能打包会提醒
+		npm uninstall css-loader（卸载）
+		npm install css-loader@2.0.2 --save-dev 本地局部安装，开发时使用
+		配置：
+		module.exports = {
+			module: {
+				rules: [{
+					test: /\.css$/i,
+					// css-loader 只负责加载css
+					// style-loader 只负责把样式添加到DOM中
+					// loader读取时从右向左
+					use: ['style-loader', "css-loader"],
+				}, ],
+			},
+		}
+	(5)url-loader  转化url
+		配置：
+		{
+			test: /\.(png|jpg|gif)$/i,
+			use: [{
+				loader: 'url-loader',
+				options: {
+					// 当图片大小大于limit时 会用file-loader进行打包,配置打包后后寻找路径
+					// 当图片大小小于limit时 会用url-loader打包
+					limit: 8196,
+					// 配置图片命名和位置 在img文件夹下 名字+8位哈希数字+扩展名
+					name: 'img/[name].[hash:8].[ext]'
+				}
+			}]
+		}
+	(6)babel-loader  将es6转为es5
+		配置：
+		{
+			test: /\.m?js$/,
+			// 排除调以下文件夹中的文件,即node_modules和bower_components文件夹下的文件不进行解析
+			exclude: /(node_modules|bower_components)/,
+			use: {
+				// babel 将es6转为es5,例如es5中没有const
+				loader: 'babel-loader',
+				options: {
+					presets: ['es2015']
+				}
+			}
+		}
 
 
 
